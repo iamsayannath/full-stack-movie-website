@@ -9,7 +9,7 @@ const Context = ({ children }) => {
 
   const getMovies = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/movies');
+      const response = await fetch('https://full-stack-movie-website.onrender.com/api/movies');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -24,7 +24,7 @@ const Context = ({ children }) => {
 
   const getTVseries = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/tv');
+      const response = await fetch('https://full-stack-movie-website.onrender.com/api/tv');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
