@@ -6,8 +6,10 @@ const Context = ({ children }) => {
 
   const [movies, setMovies] = useState([]);
   const [tvseries, setTVSeries] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getMovies = async () => {
+    setLoading(true);
     try {
       const response = await fetch('https://full-stack-movie-website.onrender.com/api/movies');
       if (!response.ok) {
@@ -16,14 +18,17 @@ const Context = ({ children }) => {
       const data = await response.json();
       //console.log(data);
       return data;
+
     } catch (error) {
       console.error('Failed to fetch movies:', error);
       return [];
     };
+
   };
 
   const getTVseries = async () => {
     try {
+      setLoading(true);
       const response = await fetch('https://full-stack-movie-website.onrender.com/api/tv');
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -39,20 +44,25 @@ const Context = ({ children }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       const data = await getMovies();
       setMovies(data.movies);
     };
     fetchData();
+    setLoading(false);
   }, []);
 
 
   useEffect(() => {
+    setLoading(true);
+    // Fetch TV series data
     const fetchData = async () => {
       const data = await getTVseries();
       setTVSeries(data.tv);
     };
     fetchData();
+    setLoading(false);
   }, []);
 
 
@@ -60,7 +70,9 @@ const Context = ({ children }) => {
 
   const value = {
     movies,
-    tvseries
+    tvseries,
+    loading,
+    setLoading
   };
   // Provide the context value to children components
   return (

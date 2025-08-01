@@ -5,12 +5,13 @@ import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TfiArrowCircleLeft } from "react-icons/tfi";
 import { MyContext } from '../context/Context';
+import "../index.css";
 
 const Home = () => {
   const [searchterm, setSearchterm] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentslide, setcurrentslide] = useState(0);
-  const { movies, tvseries } = useContext(MyContext);
+  const { movies, tvseries, loading } = useContext(MyContext);
 
 
   // Carousel logic for movies
@@ -42,11 +43,14 @@ const Home = () => {
 
       <div><Navbar /></div>
 
+      {loading && <div className="spinner"></div>}
+
       <div className="px-4 py-4 sm:px-8 ">
         <div className='py-4 sm:py-12 sm:px-16 text-lg sm:text-3xl flex flex-row gap-6 '>
           <label htmlFor=""><FaSearch /> </label>
           <input placeholder='Search movies or tvshows' className='bg-black' value={searchterm} onChange={(e) => setSearchterm(e.target.value)} />
         </div>
+
         {/* Search Results */}
         {searchterm.trim() ? (
           <div>
@@ -76,6 +80,7 @@ const Home = () => {
         ) : (
           <>
             {/* Trending movies carousel */}
+
             <div>
               <h1 className=' sm:px-20 text-4xl'>Trending movies</h1>
               <div >

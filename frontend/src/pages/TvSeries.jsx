@@ -9,7 +9,7 @@ const TvSeries = () => {
   const [searchTvserie, setSearchTvserie] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const tvseriesPerPage = 12;
-  const { tvseries } = useContext(MyContext);
+  const { tvseries, loading } = useContext(MyContext);
 
 
 
@@ -39,7 +39,7 @@ const TvSeries = () => {
           </div>
 
           <h1 className='sm:px-20 text-4xl'>TVseries page</h1>
-
+          {loading && <div className="spinner"></div>}
           <div>
             {currentTVseries.length > 0 ? (
               <div className="px-4 py-4 sm:px-8 grid  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 lg:gap-8">

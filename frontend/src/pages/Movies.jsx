@@ -9,7 +9,7 @@ const Movies = () => {
   const [searchMovie, setSearchMovie] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const moviesPerPage = 12;
-  const { movies } = useContext(MyContext);
+  const { movies, loading } = useContext(MyContext);
 
 
   const filteredMovies = movies.filter((movie) =>
@@ -32,6 +32,7 @@ const Movies = () => {
             <input placeholder='Search for movies' className='bg-black' value={searchMovie} onChange={(e) => setSearchMovie(e.target.value)} />
           </div>
           <h1 className=' sm:px-20 text-4xl'>Movies page</h1>
+          {loading && <div className="spinner"></div>}
           <div>
             {currentMovies.length > 0 ? (
               <div className="px-4 py-4 sm:px-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-8">
